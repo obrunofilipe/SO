@@ -1,7 +1,0 @@
-struct test{
-	int i;
-	char n[10];
-}
-
-guardar em memoria (num fich)
-
