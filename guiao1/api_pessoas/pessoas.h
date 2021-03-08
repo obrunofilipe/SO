@@ -15,8 +15,9 @@ typedef struct pessoa{
     char nome[Max_Nome];
 }*PESSOA;
 
-void add_Pessoa(int fd ,char *pessoa, char* idade);
+int add_Pessoa(int fd ,char *pessoa, char* idade);
 void update_Age(int fd ,char* pessoa, char* idade);
+void update_Age2(int fd, char* n_registo, char* idade);
 int load_register(int fd, PESSOA* p1);
 
 #endif

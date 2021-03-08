@@ -8,13 +8,16 @@ int load_register(int fd, PESSOA* p1){
     //free(buffer);
     return bread;
 }
-void add_Pessoa(int fd ,char *pessoa, char* idade){
-    int wb = 0;
-    lseek(fd,0,SEEK_END);
-    PESSOA p1 = malloc(sizeof(struct pessoa));
+int add_Pessoa(int fd ,char *pessoa, char* idade){
+    int offset = 0, size_pessoa, registo;
+    offset = lseek(fd,0,SEEK_END);
+    size_pessoa = sizeof(struct pessoa);
+    registo = offset / size_pessoa;
+    PESSOA p1 = malloc(size_pessoa);
     p1->idade = atoi(idade);
     strcpy(p1->nome ,pessoa);
-    wb = write(fd,p1,sizeof(struct pessoa));
+    write(fd,p1,sizeof(struct pessoa));
+    return registo;
 }
 
 void update_Age(int fd, char* pessoa, char* idade){
@@ -30,4 +33,16 @@ void update_Age(int fd, char* pessoa, char* idade){
         write(fd,p1,sizeof(struct pessoa));
     }
     //free(p1);
+}
+
+void update_Age2(int fd, char* n_registo, char* idade){
+    int registo_update, byte_offset, bread;
+    PESSOA p = malloc(sizeof(struct pessoa));
+    registo_update = atoi(n_registo);
+    byte_offset = sizeof(struct pessoa) * registo_update;
+    lseek(fd,byte_offset,SEEK_CUR);
+    bread = read(fd,p,sizeof(struct pessoa));
+    lseek(fd,-bread,SEEK_CUR);
+    p->idade = atoi(idade);
+    write(fd,p,sizeof(struct pessoa));
 }
