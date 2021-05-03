@@ -1,0 +1,11 @@
+pipes anonimos:
+  buffer em memoria
+  consumidores -> tirar informação
+  produtores -> escrever informação
+
+  semantica de comnunicação:
+    -> sentido de comunicação unidirecional (de um processo para outro)
+    -> FIFO (first in , first out)
+
+    | -> pipe na shell
+    

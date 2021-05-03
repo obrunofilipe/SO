@@ -7,6 +7,6 @@ int main(){
     pid_t pidp, pid;
     pid = getpid();
     pidp = getppid();   
-    printf("PID processo pai: %d \nPID processo atual: %d\n",pid,pidp);
+    printf("PID processo pai: %d \nPID processo atual: %d\n",pidp,pid);
     return 0;
 }

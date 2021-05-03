@@ -1,0 +1,21 @@
+cada processo tem um identificador unico
+	fork -> permite a um processo criar outro processo
+		-> processo criados = pai
+		-> processo criado  = filho
+	     -> os processo pai e o processo filho sao muito semelhantes, nao partilham as variaveis e endereçamento , mas no momento da criação tudo do processo pai é copiado para o processo filho, (ex: se o processo pai tiver um processo aberto , esse processo vai estar aberto no processo filho tambem)
+
+	-> pid_t fork(void);
+		. cria um processo filho
+		. faz uma copia do registo de memoria, o processo pai vai receber o id do processo filho , e este recebe 0.
+		. fork retorna um inteiro , se for diferente de zero refere-se ao processo pai, se igual a 0 refere-se ao processo filho.
+		. o processo filho termina a execução com a invocação de _exit
+		. wait / waitpid 
+
+	-> pid_t wait (int *status);
+		. bloqueia a execução ate que um processo filho termine a sua execução
+		. variavel status guarda o resultado do processo filho (se terminou bem ou nao ) 
+		. o wait não é a unica forma possivel de o processo pai recolher informação do processo filho
+		. Mesmo que o processo filho ja tenha terminado , o resultado de retorno fica armazenado até que seja invocada a função "wait" , quando a funçai wait for invocada o processo pai recebe a informaçao do processo filho
+
+	-> pid == 0 
+		. Só o processo pai é que tem o pid zero

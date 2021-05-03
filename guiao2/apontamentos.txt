@@ -1,0 +1,18 @@
+:_exit()
+	o exit consegue passar um valor de um processo filho para um processo pai
+	no entanto esse valor só fica armazenado nos ultimos 8 bits, o que significa que só é possível armazenar valores entre 0 e 255 , ou seja , se for "retornado" um valor maior que 255 esse será truncado para um valor entre 0 e 255 (limitação na passagem de informação).
+
+:wait(&status)
+	a variavel status guarda o valor retornado em _exit() nos seus primeiros 8 bits (limitação)
+
+:Exec
+	Executar um ficheiro dentro do codigo que estou a executar
+	O exec vai chamar um novo programa (isto será executado pela bash).
+	Ao chamar um executavel novo , este substitui o programa que estava a esxecutar, a memoria é substituida pelo novo programa, no entanto o descritor de ficheiro que abriu o primeiro programa ainda existe no Kernel.
+	Fork + Exec -> interpretador de comandos . processo pai cria um filho e o novo filho executa um novo programa.
+
+	system call:
+		int execl (....); -> é necessario passar todo o 'path' até ao executavel
+		int execlp(....); -> nao é necessario passar todo o 'path' desde que este programa esteja nas pastas de programas do sistema.
+
+	
