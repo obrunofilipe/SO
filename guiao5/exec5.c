@@ -44,10 +44,6 @@ int main(){
                     close(p_fildes[cmd_count][1]);
                     if(execvp(cmd_args[0], cmd_args) == -1) printf("nao executou\n");
                     break;
-                default:
-                    //close(p_fildes[cmd_count][0]);
-                    //close(p_fildes[cmd_count][1]); //fechar os desc. associados ao pipe no processo pai
-                    break;
             }
         }
 
@@ -75,12 +71,8 @@ int main(){
                     parse_args(cmds[cmd_count],cmd_args);//fragmentar o comando nos seus argumentos
                     if(execvp(cmd_args[0],cmd_args) == -1) printf("\n nao executou \n");//executar os comandos
                     break;
-                default:
-                    //close(p_fildes[cmd_count][0]);
-                    //close(p_fildes[cmd_count][1]); //fechar os desc. associados ao pipe no processo pai
-                    break;
-
             }
+            close(p_fildes[cmd_count - 1 ][0]);
         }
         cmd_count++;
     }
