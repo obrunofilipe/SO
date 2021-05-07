@@ -52,9 +52,9 @@ int main(){
         }
 
         else if(cmd_count == cmd_total - 1 ){
+            close(p_fildes[cmd_count - 1][1]);//fechar os desc. de escrita associado ao pipe anterior
             switch (fork()) {
                 case 0:
-                    close(p_fildes[cmd_count - 1][1]);//fechar os desc. de escrita associado ao pipe anterior
                     dup2(p_fildes[cmd_count - 1 ][0], STDIN_FILENO);
                     close(p_fildes[cmd_count -1 ][0]);
                     parse_args(cmds[cmd_count],cmd_args);
@@ -65,7 +65,7 @@ int main(){
         }
         else{
             pipe(p_fildes[cmd_count]);
-            close(p_fildes[cmd_count - 1][1]);
+            close(p_fildes[cmd_count - 1][1]);//fechar o descritor de escrita do pipe anterior
             switch (fork()) {
                 case 0://filho
                     dup2(p_fildes[cmd_count - 1][0],STDIN_FILENO); //redirecionar o desc. de leitura do pipe do comando anterior par o stdin
